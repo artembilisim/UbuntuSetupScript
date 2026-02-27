@@ -8,7 +8,7 @@
 # Design: GIMP, Krita, Darktable, draw.io
 # Business & Data apps: Postman, Zoom, Teams, DBeaver, FileZilla
 # Browsers: Firefox, Google Chrome, Brave
-# Remote Desktop: Remmina, AnyDesk, GNOME Wired Desktop
+# Remote Desktop: Remmina, AnyDesk, GNOME Network Display
 # ==========================================================
 
 echo "=== 🚀 Starting Snap-Free Ubuntu Full Setup ==="
@@ -143,8 +143,8 @@ echo "deb [signed-by=/usr/share/keyrings/anydesk-archive-keyring.gpg] http://deb
 sudo apt update
 sudo apt install -y anydesk
 
-# GNOME Wired Desktop
-flatpak install -y flathub org.gnome.Wired
+# GNOME Network Display
+flatpak install flathub org.gnome.NetworkDisplays
 
 # 2️⃣1️⃣ Business Apps (Flatpak)
 echo "[21/27] Installing business apps..."
@@ -181,3 +181,4 @@ sudo update-desktop-database
 # 2️⃣7️⃣ End
 echo "[27/27] Script fully finished!"
 echo "All tools installed and ready to use."
+
