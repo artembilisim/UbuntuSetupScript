@@ -112,12 +112,12 @@ sudo apt install -y gimp krita darktable
 
 # 1️⃣7️⃣ Snap Firefox & Thunderbird Kaldır
 echo "[17/27] Removing Snap versions of Firefox & Thunderbird..."
-sudo snap remove firefox thunderbird || echo "No Snap versions found."
+#sudo snap remove firefox thunderbird || echo "No Snap versions found."
 
 # 1️⃣8️⃣ Install Firefox & Thunderbird via APT
 echo "[18/27] Installing Firefox & Thunderbird via APT..."
 sudo apt update
-sudo apt install -y firefox thunderbird
+#sudo apt install -y firefox thunderbird
 
 # 1️⃣9️⃣ Google Chrome
 echo "[19/27] Installing Google Chrome..."
@@ -152,10 +152,12 @@ flatpak install -y flathub org.gnome.NetworkDisplays
 echo "[22/27] Installing business apps..."
 flatpak install -y flathub \
 com.getpostman.Postman \
-us.zoom.Zoom \
 com.microsoft.Teams \
 io.dbeaver.DBeaverCommunity \
 com.jgraph.drawio.desktop
+
+wget https://zoom.us/client/latest/zoom_amd64.deb
+sudo apt install ./zoom_amd64.deb
 
 # 2️⃣3️⃣ Printer Support
 echo "[23/27] Installing printer support..."
@@ -180,5 +182,6 @@ sudo update-desktop-database
 echo "[27/27] Script fully finished!"
 echo "All tools installed and ready to use."
 echo "⚠️ Logout/Login required for Docker, Flatpak, Remmina, AnyDesk & GNOME Wired Desktop."
+
 
 
