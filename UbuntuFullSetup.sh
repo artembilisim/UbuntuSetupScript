@@ -1,29 +1,23 @@
 #!/bin/bash
 # ==========================================================
-# Ubuntu Full Setup Script (Snap-Free)
+# Ubuntu Full Setup Script (NTFS Support)
 # ==========================================================
 # Flatpak-enabled, DNS 1.1.1.1, UFW active
 # Dev tools: Coretto21 JDK, .NET 9/10 SDK & Runtime, VS Code, Node.js, Python 3
 # Test & Automation: JMeter, Docker + Compose
 # Design: GIMP, Krita, Darktable, draw.io
-# Business & Data apps: Postman, Zoom, Teams, DBeaver, FileZilla
+# Business & Data apps: Postman, Zoom, Teams, DBeaver, FileZilla, Thunderbird
 # Browsers: Firefox, Google Chrome, Brave
-# Remote Desktop: Remmina, AnyDesk, GNOME Network Display
+# Remote Desktop: Remmina, AnyDesk, Gnome Network Displays
 # ==========================================================
 
 echo "=== 🚀 Starting Snap-Free Ubuntu Full Setup ==="
-
-# 0️⃣ Remove Snap
-echo "[0/27] Removing Snap and cleaning..."
-sudo snap list >/dev/null 2>&1 && sudo snap remove $(snap list | awk '!/^Name|^core/ {print $1}') || true
-sudo apt purge -y snapd
-rm -rf ~/snap /var/snap /var/lib/snapd /snap
 
 # 1️⃣ System Update
 echo "[1/27] Updating system..."
 sudo apt update && sudo apt upgrade -y
 
-# 2️⃣ Base Dependencies
+# 2️⃣ Base Dependencies + NTFS Support
 echo "[2/27] Installing base dependencies..."
 sudo apt install -y \
   software-properties-common \
@@ -33,7 +27,8 @@ sudo apt install -y \
   wget \
   gnupg \
   lsb-release \
-  filezilla
+  filezilla \
+  ntfs-3g
 
 # 3️⃣ Enable UFW Firewall
 echo "[3/27] Enabling UFW firewall..."
@@ -115,16 +110,23 @@ rm /tmp/apache-jmeter.tgz
 echo "[16/27] Installing design tools..."
 sudo apt install -y gimp krita darktable
 
-# 1️⃣7️⃣ Browsers: Firefox & Chrome
-echo "[17/27] Installing Firefox..."
-sudo apt install -y firefox
-echo "[18/27] Installing Google Chrome..."
+# 1️⃣7️⃣ Snap Firefox & Thunderbird Kaldır
+echo "[17/27] Removing Snap versions of Firefox & Thunderbird..."
+sudo snap remove firefox thunderbird || echo "No Snap versions found."
+
+# 1️⃣8️⃣ Install Firefox & Thunderbird via APT
+echo "[18/27] Installing Firefox & Thunderbird via APT..."
+sudo apt update
+sudo apt install -y firefox thunderbird
+
+# 1️⃣9️⃣ Google Chrome
+echo "[19/27] Installing Google Chrome..."
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
 sudo dpkg -i /tmp/chrome.deb || sudo apt install -f -y
 rm /tmp/chrome.deb
 
-# 1️⃣9️⃣ Brave Browser
-echo "[19/27] Installing Brave..."
+# 2️⃣0️⃣ Brave Browser
+echo "[20/27] Installing Brave..."
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg \
 https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] \
@@ -133,8 +135,8 @@ sudo tee /etc/apt/sources.list.d/brave-browser.list
 sudo apt update
 sudo apt install -y brave-browser
 
-# 2️⃣0️⃣ Remote Desktop Tools: Remmina, AnyDesk, GNOME Wired Desktop
-echo "[20/27] Installing Remote Desktop Apps..."
+# 2️⃣1️⃣ Remote Desktop Tools: Remmina, AnyDesk Gnome Network Displays
+echo "[21/27] Installing Remote Desktop Apps..."
 sudo apt install -y remmina remmina-plugin-rdp remmina-plugin-vnc remmina-plugin-secret
 
 # AnyDesk (modern keyring method)
@@ -144,10 +146,10 @@ sudo apt update
 sudo apt install -y anydesk
 
 # GNOME Network Display
-flatpak install flathub org.gnome.NetworkDisplays
+flatpak install -y flathub org.gnome.NetworkDisplays
 
-# 2️⃣1️⃣ Business Apps (Flatpak)
-echo "[21/27] Installing business apps..."
+# 2️⃣2️⃣ Business Apps (Flatpak)
+echo "[22/27] Installing business apps..."
 flatpak install -y flathub \
 com.getpostman.Postman \
 us.zoom.Zoom \
@@ -155,23 +157,19 @@ com.microsoft.Teams \
 io.dbeaver.DBeaverCommunity \
 com.jgraph.drawio.desktop
 
-# 2️⃣2️⃣ Printer Support
-echo "[22/27] Installing printer support..."
+# 2️⃣3️⃣ Printer Support
+echo "[23/27] Installing printer support..."
 sudo apt install -y cups printer-driver-gutenprint system-config-printer
 sudo systemctl restart cups
 
-# 2️⃣3️⃣ Cleanup
-echo "[23/27] Cleaning up..."
+# 2️⃣4️⃣ Cleanup
+echo "[24/27] Cleaning up..."
 sudo apt autoremove -y
 
-# 2️⃣4️⃣ Verify .NET
-echo "[24/27] Verifying .NET installation..."
+# 2️⃣5️⃣ Verify .NET
+echo "[25/27] Verifying .NET installation..."
 dotnet --list-sdks
 dotnet --list-runtimes
-
-# 2️⃣5️⃣ Final Message
-echo "=== ✅ Snap-Free Ubuntu Full Setup Complete! ==="
-echo "⚠️ Logout/Login required for Docker, Flatpak, Remmina, AnyDesk & GNOME Wired Desktop."
 
 # 2️⃣6️⃣ Optional Shortcuts
 echo "[26/27] Ensuring Flatpak apps appear in GNOME menu..."
@@ -181,4 +179,4 @@ sudo update-desktop-database
 # 2️⃣7️⃣ End
 echo "[27/27] Script fully finished!"
 echo "All tools installed and ready to use."
-
+echo "⚠️ Logout/Login required for Docker, Flatpak, Remmina, AnyDesk & GNOME Wired Desktop."
