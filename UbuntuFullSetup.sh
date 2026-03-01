@@ -68,8 +68,8 @@ sudo dpkg -i packages-microsoft-prod.deb
 sudo apt update
 
 # 9️⃣ .NET 9 SDK + Runtime
-echo "[9/27] Installing .NET 9 SDK & Runtime..."
-sudo apt install -y dotnet-sdk-9.0 dotnet-runtime-9.0 aspnetcore-runtime-9.0
+# echo "[9/27] Installing .NET 9 SDK & Runtime..."
+# sudo apt install -y dotnet-sdk-9.0 dotnet-runtime-9.0 aspnetcore-runtime-9.0
 
 # 🔟 .NET 10 SDK + Runtime
 echo "[10/27] Installing .NET 10 SDK & Runtime..."
@@ -180,3 +180,4 @@ sudo update-desktop-database
 echo "[27/27] Script fully finished!"
 echo "All tools installed and ready to use."
 echo "⚠️ Logout/Login required for Docker, Flatpak, Remmina, AnyDesk & GNOME Wired Desktop."
+
