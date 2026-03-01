@@ -156,9 +156,6 @@ com.microsoft.Teams \
 io.dbeaver.DBeaverCommunity \
 com.jgraph.drawio.desktop
 
-wget https://zoom.us/client/latest/zoom_amd64.deb
-sudo apt install ./zoom_amd64.deb
-
 # 2️⃣3️⃣ Printer Support
 echo "[23/27] Installing printer support..."
 sudo apt install -y cups printer-driver-gutenprint system-config-printer
@@ -182,6 +179,7 @@ sudo update-desktop-database
 echo "[27/27] Script fully finished!"
 echo "All tools installed and ready to use."
 echo "⚠️ Logout/Login required for Docker, Flatpak, Remmina, AnyDesk & GNOME Wired Desktop."
+
 
 
 
