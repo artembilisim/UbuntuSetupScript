@@ -148,6 +148,10 @@ sudo apt install -y anydesk
 # GNOME Network Display
 flatpak install -y flathub org.gnome.NetworkDisplays
 
+sudo ufw allow 7236/tcp
+sudo ufw allow 5353/udp
+sudo ufw reload
+
 # 2️⃣2️⃣ Business Apps (Flatpak)
 echo "[22/27] Installing business apps..."
 flatpak install -y flathub \
@@ -179,6 +183,7 @@ sudo update-desktop-database
 echo "[27/27] Script fully finished!"
 echo "All tools installed and ready to use."
 echo "⚠️ Logout/Login required for Docker, Flatpak, Remmina, AnyDesk & GNOME Wired Desktop."
+
 
 
 
