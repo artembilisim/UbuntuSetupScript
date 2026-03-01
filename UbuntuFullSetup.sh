@@ -77,7 +77,7 @@ sudo apt install -y dotnet-sdk-10.0 dotnet-runtime-10.0 aspnetcore-runtime-10.0 
 
 # 1️⃣1️⃣ VS Code
 echo "[11/27] Installing VS Code..."
-sudo apt install -y code
+sudo snap install code --classic
 
 # 1️⃣2️⃣ Docker + Compose
 echo "[12/27] Installing Docker..."
@@ -101,7 +101,7 @@ sudo apt install -y python3 python3-pip python3-venv
 echo "[15/27] Installing Apache JMeter..."
 JMETER_VERSION="5.6.2"
 sudo mkdir -p /opt/jmeter
-wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-$JMETER_VERSION.tgz -O /tmp/apache-jmeter.tgz
+wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_VERSION.tgz -O /tmp/apache-jmeter.tgz
 sudo tar -xzf /tmp/apache-jmeter.tgz -C /opt/jmeter --strip-components=1
 sudo ln -sf /opt/jmeter/bin/jmeter /usr/local/bin/jmeter
 rm /tmp/apache-jmeter.tgz
@@ -180,4 +180,5 @@ sudo update-desktop-database
 echo "[27/27] Script fully finished!"
 echo "All tools installed and ready to use."
 echo "⚠️ Logout/Login required for Docker, Flatpak, Remmina, AnyDesk & GNOME Wired Desktop."
+
 
